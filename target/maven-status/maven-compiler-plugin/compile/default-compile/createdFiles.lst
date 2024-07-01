@@ -1,0 +1,11 @@
+thiago\ppt\logica\Usuario_.class
+thiago\ppt\logica\IA.class
+thiago\ppt\logica\Usuario.class
+thiago\ppt\logica\Juego.class
+thiago\ppt\PPT.class
+thiago\ppt\persistencia\exceptions\PreexistingEntityException.class
+thiago\ppt\persistencia\ControladoraPersistencia.class
+thiago\ppt\logica\Carta.class
+thiago\ppt\persistencia\exceptions\NonexistentEntityException.class
+thiago\ppt\persistencia\exceptions\IllegalOrphanException.class
+thiago\ppt\persistencia\UsuarioJpaController.class
