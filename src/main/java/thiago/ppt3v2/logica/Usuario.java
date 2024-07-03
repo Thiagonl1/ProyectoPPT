@@ -1,40 +1,62 @@
 package thiago.ppt3v2.logica;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import thiago.ppt3v2.persistencia.ControladoraPersistencia;
+
 
 @Entity
-public class Usuario implements Serializable {
+@Table(name = "usuario")
+@NamedQueries({
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findByUsuarioId", query = "SELECT u FROM Usuario u WHERE u.usuarioId = :usuarioId"),
+    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
+    @NamedQuery(name = "Usuario.findByEstrellas", query = "SELECT u FROM Usuario u WHERE u.estrellas = :estrellas")})
+public class Usuario extends Thread implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int usuarioId;
+    @Basic(optional = false)
+    @Column(name = "usuarioId")
+    private Integer usuarioId;
+    @Basic(optional = false)
+    @Column(name = "nombre")
     private String nombre;
+    @Basic(optional = false)
+    @Column(name = "estrellas")
     private int estrellas;
-    
-    @OneToMany (mappedBy= "user")
-    private ArrayList<Cartas> cartas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
+    private Collection<CartaUsuario> cartaUsuarioCollection;
 
-    public Usuario(int usuarioId, String nombre, int estrellas, ArrayList<Cartas> cartas) {
+    public Usuario() {
+    }
+
+    
+    public Usuario(Integer usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public Usuario(Integer usuarioId, String nombre, int estrellas) {
         this.usuarioId = usuarioId;
         this.nombre = nombre;
         this.estrellas = estrellas;
-        this.cartas = cartas;
     }
 
-    public Usuario(){
-    }
-
-    public int getUsuarioId() {
+    public Integer getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(int usuarioId) {
+    public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
     }
 
@@ -54,30 +76,48 @@ public class Usuario implements Serializable {
         this.estrellas = estrellas;
     }
 
-    public ArrayList<Cartas> getCartas() {
-        return cartas;
+    public Collection<CartaUsuario> getCartaUsuarioCollection() {
+        return cartaUsuarioCollection;
     }
 
-    public void setCartas(ArrayList<Cartas> cartas) {
-        this.cartas = cartas;
+    public void setCartaUsuarioCollection(Collection<CartaUsuario> cartaUsuarioCollection) {
+        this.cartaUsuarioCollection = cartaUsuarioCollection;
     }
-    
-    public ArrayList<Cartas> inicializarCartas(ArrayList<Cartas> cartas){
-        // SI LA LISTA DE CARTAS ESTA VACIA (cosa que tendria que pasar siempre)
-        if(this.cartas == null) {
-            // le agrego las cartas que tengo predefinidas en una lista al usuario en cuestion
-            // EL PROBLEMA QUE VEO ACA
-            // no tengo o veo manera de agregar el ID del usuario en cuestion, entonces le mando null como parametro
-            
-            for(int i = 0 ; i < cartas.size() ; i++){
-                this.cartas.add(cartas.get(i));
-                this.cartas.get(i).setUsuarioId(this.usuarioId);
-             }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (usuarioId != null ? usuarioId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Usuario)) {
+            return false;
         }
-        return this.cartas;
+        Usuario other = (Usuario) object;
+        if ((this.usuarioId == null && other.usuarioId != null) || (this.usuarioId != null && !this.usuarioId.equals(other.usuarioId))) {
+            return false;
+        }
+        return true;
     }
     
     
-    
+    @Override
+    public void run(){
+        ControladoraPersistencia controlP = new ControladoraPersistencia();
+        if(this.usuarioId == 1){
+            // EXPORTAMOS EL DECK ACA
+            List<CartaUsuario> mano = controlP.findByUsuarioId(this.usuarioId);
+            while(!mano.isEmpty() && this.estrellas != 0){
+                // MOSTRAR LAS IAS
+                
+                
+                
+            }
+        }
+    }
     
 }

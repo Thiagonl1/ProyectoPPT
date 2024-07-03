@@ -5,8 +5,11 @@ thiago\ppt3v2\logica\ControladoraLogica.class
 thiago\ppt3v2\persistencia\exceptions\IllegalOrphanException.class
 thiago\ppt3v2\logica\Usuario_.class
 thiago\ppt3v2\logica\Cartas.class
+thiago\ppt3v2\logica\CartaUsuario_.class
 thiago\ppt3v2\persistencia\CartasJpaController.class
 thiago\ppt3v2\persistencia\UsuarioJpaController.class
 thiago\ppt3v2\logica\Usuario.class
 thiago\ppt3v2\persistencia\exceptions\PreexistingEntityException.class
+thiago\ppt3v2\persistencia\CartaUsuarioJpaController.class
 thiago\ppt3v2\persistencia\ControladoraPersistencia.class
+thiago\ppt3v2\logica\CartaUsuario.class

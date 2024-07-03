@@ -4,6 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>thiago.ppt3v2.logica.Usuario</class>
     <class>thiago.ppt3v2.logica.Cartas</class>
+    <class>thiago.ppt3v2.logica.Usuario_1</class>
+    <class>thiago.ppt3v2.logica.CartaUsuario</class>
+    <class>thiago.ppt3v2.logica.Cartas_1</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/pp3jpa?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

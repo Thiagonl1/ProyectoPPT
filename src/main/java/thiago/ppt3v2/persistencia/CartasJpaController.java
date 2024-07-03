@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 import thiago.ppt3v2.logica.Cartas;
 import thiago.ppt3v2.persistencia.exceptions.NonexistentEntityException;
 
+
 public class CartasJpaController implements Serializable {
 
     public CartasJpaController(){
@@ -52,7 +53,7 @@ public class CartasJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = cartas.getUsuarioID();
+                int id = cartas.getCartaId();
                 if (findCartas(id) == null) {
                     throw new NonexistentEntityException("The cartas with id " + id + " no longer exists.");
                 }
@@ -73,7 +74,7 @@ public class CartasJpaController implements Serializable {
             Cartas cartas;
             try {
                 cartas = em.getReference(Cartas.class, id);
-                cartas.getUsuarioID();
+                cartas.getCartaId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cartas with id " + id + " no longer exists.", enfe);
             }
